@@ -3,8 +3,8 @@
 import Image from "next/image"
 import { useState } from "react"
 import { ChevronRight, ChevronDown } from "lucide-react"
+import Timeline from "./timeline/Timeline";
 import { motion } from "framer-motion"
-import Timeline from "./timeline"
 
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
     <main>
       <SchoolProfileHero />
       <CoreValuePage />
-      <Timeline /> {/* Tambahkan ini */}
+      <Timeline/>
     </main>
   )
 }
