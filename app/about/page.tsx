@@ -1,30 +1,29 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { useState } from "react"
-import { ChevronRight, ChevronDown } from "lucide-react"
+import Image from "next/image";
+import { useState } from "react";
+import { ChevronRight, ChevronDown } from "lucide-react";
 import Timeline from "./timeline/Timeline";
-import { motion } from "framer-motion"
-
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
     <main>
       <SchoolProfileHero />
       <CoreValuePage />
-      <Timeline/>
+      <Timeline />
+      <SchoolFacilities />
     </main>
-  )
+  );
 }
-
 
 function SchoolProfileHero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center">
-      {/* Background Image dari folder public */}
+      {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/assets/gedungsekolah.png')"}}
+        style={{ backgroundImage: "url('/assets/gedungsekolah.png')" }}
       />
 
       {/* Overlay hitam */}
@@ -41,37 +40,37 @@ function SchoolProfileHero() {
         </p>
       </div>
     </section>
-  )
+  );
 }
 
 function CoreValuePage() {
   const coreValues = [
     {
       title: "Mudah Bergaul",
-      desc: "Membangun hubungan yang hangat dan saling menghargai, sehingga mudah berkolaborasi dengan siapa pun."
+      desc: "Membangun hubungan yang hangat dan saling menghargai, sehingga mudah berkolaborasi dengan siapa pun.",
     },
     {
       title: "Gigih",
-      desc: "Terus berusaha dengan semangat pantang menyerah demi meraih tujuan."
+      desc: "Terus berusaha dengan semangat pantang menyerah demi meraih tujuan.",
     },
     {
       title: "Mandiri",
-      desc: "Mampu bertanggung jawab dan menyelesaikan masalah secara mandiri."
+      desc: "Mampu bertanggung jawab dan menyelesaikan masalah secara mandiri.",
     },
     {
       title: "Profesional",
-      desc: "Menjaga integritas, disiplin, serta hasil kerja berkualitas."
-    }
-  ]
+      desc: "Menjaga integritas, disiplin, serta hasil kerja berkualitas.",
+    },
+  ];
 
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleDropdown = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index)
-  }
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
-    <div className="flex items-center justify-center bg-white-100 p-6">
+    <section className="flex items-center justify-center bg-gray-50 p-6">
       <div className="bg-[#005bd3] rounded-3xl shadow-lg w-full max-w-7xl px-[60px] py-[40px] transition-all duration-300">
         <h1 className="text-white text-4xl font-bold text-center tracking-wider mb-8">
           CORE VALUE
@@ -95,7 +94,7 @@ function CoreValuePage() {
                 )}
               </button>
 
-              {/* Dropdown dengan animasi smooth */}
+              {/* Dropdown animasi */}
               <motion.div
                 initial={false}
                 animate={{
@@ -105,14 +104,55 @@ function CoreValuePage() {
                 transition={{ duration: 0.35, ease: "easeInOut" }}
                 className="overflow-hidden px-6"
               >
-                <p className="text-black text-base py-3">
-                  {value.desc}
-                </p>
+                <p className="text-black text-base py-3">{value.desc}</p>
               </motion.div>
             </div>
           ))}
         </div>
       </div>
-    </div>
-  )
+    </section>
+  );
+}
+
+function SchoolFacilities() {
+  const facilities = [
+    { title: "Ruang Rapat", image: "/discussion-in-meeting-room.png" },
+    { title: "Lab Komputer", image: "/computer-laboratory.png" },
+    { title: "Ruang Gym", image: "/green-floor-gym.png" },
+    { title: "Kamar Sehat", image: "/health-room-bunkbeds.png" },
+  ];
+
+  return (
+    <section className="min-h-screen bg-[#ffffff] p-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <h1 className="text-[#005bd3] text-5xl font-bold mb-12 text-center">
+          Fasilitas Sekolah
+        </h1>
+
+        {/* Facilities Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {facilities.map((facility, index) => (
+            <div key={index} className="relative group cursor-pointer">
+              <div className="relative overflow-hidden rounded-2xl aspect-[4/3]">
+                <img
+                  src={facility.image || "/placeholder.svg"}
+                  alt={facility.title}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-20 rounded-2xl" />
+                {/* Title Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-white text-xl font-semibold drop-shadow-lg">
+                    {facility.title}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

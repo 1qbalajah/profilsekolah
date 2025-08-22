@@ -1,97 +1,78 @@
 .timeline-container {
+  width: 100%;
   max-width: 1200px;
-  margin: 50px auto;
-  padding: 20px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
 .timeline-title {
-  text-align: center;
+  text-align: justify;
   font-size: 2rem;
+  margin-bottom: 50px;
   font-weight: bold;
-  color: #1a4dd8;
-  margin-bottom: 40px;
+  color: #005BD3;
 }
 
 .timeline-two-column {
   display: flex;
   justify-content: space-between;
-  gap: 50px; /* jarak antar kolom */
+  position: relative;
+  gap: 40px;
 }
 
 .timeline-column {
+  width: 50%;
   position: relative;
-  flex: 1;
+  padding: 0 20px;
 }
 
 .timeline-line {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 4px;
-  background-color: #1a4dd8;
-}
-
-.left-column .timeline-line {
-  left: 20px; /* garis kiri */
-}
-
-.right-column .timeline-line {
-  left: 50%; /* garis tengah kolom kanan */
-  transform: translateX(-50%);
+  left: 20px;
+  width: 2px;
+  background-color: #005BD3;
 }
 
 .timeline-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 40px;
   position: relative;
-  margin: 50px 0;
-  padding-left: 50px;
-}
-
-.right-column .timeline-item {
-  padding-left: 0;
-  padding-right: 50px;
-  text-align: right;
 }
 
 .timeline-point {
-  position: absolute;
-  top: 0;
-  width: 18px;
-  height: 18px;
-  background-color: #1a4dd8;
+  width: 14px;
+  height: 14px;
+  background-color: #005BD3;
   border-radius: 50%;
-  transform: translateY(50%);
-}
-
-.left-column .timeline-point {
-  left: 10px;
-}
-
-.right-column .timeline-point {
-  left: 50%;
-  transform: translate(-50%, 50%);
+  position: relative;
+  left: -6px; /* Posisi titik */
+  top: 6px;
+  flex-shrink: 0;
 }
 
 .timeline-content {
-  background: #fff;
-  padding: 15px 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-}
-
-.left-column .timeline-content {
-  margin-left: 30px;
-}
-
-.right-column .timeline-content {
-  margin-right: 30px;
+  margin-left: 30px; /* Jarak agar tidak nabrak point */
+  background: none; /* Hapus background/border */
+  padding: 0;
 }
 
 .timeline-content h3 {
+  font-size: 1.2rem;
+  margin: 0 0 10px;
+  color: #005BD3;
   font-weight: bold;
-  color: #1a4dd8;
 }
 
 .timeline-content span {
-  color: #333;
+  font-weight: bold;
+  color: #005BD3;
+}
+
+.timeline-content p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
 }
