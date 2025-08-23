@@ -42,6 +42,7 @@ const Timeline = () => {
           ))}
         </div>
       </div>
+           <p className="text-center mt-10">“SMK TI BAZMA bukan sekadar sekolah,<span className="text-blue-500 font-bold">tapi wadah mencetak generasi Islami yang unggul di bidang teknologi dan berjiwa sosial tinggi.</span><br/>Seluruh operasional dan pendidikan ditopang oleh wakaf, menjadi contoh nyata pendidikan berkualitas tanpa biaya.”</p>
     </div>
   );
 };

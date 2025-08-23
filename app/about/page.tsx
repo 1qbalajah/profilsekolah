@@ -70,7 +70,7 @@ function CoreValuePage() {
   };
 
   return (
-    <section className="flex items-center justify-center bg-gray-50 p-6">
+    <section className="flex items-center justify-center bg-white-50 py-10">
       <div className="bg-[#005bd3] rounded-3xl shadow-lg w-full max-w-7xl px-[60px] py-[40px] transition-all duration-300">
         <h1 className="text-white text-4xl font-bold text-center tracking-wider mb-8">
           CORE VALUE
@@ -116,38 +116,46 @@ function CoreValuePage() {
 
 function SchoolFacilities() {
   const facilities = [
-    { title: "Ruang Rapat", image: "/discussion-in-meeting-room.png" },
-    { title: "Lab Komputer", image: "/computer-laboratory.png" },
-    { title: "Ruang Gym", image: "/green-floor-gym.png" },
-    { title: "Kamar Sehat", image: "/health-room-bunkbeds.png" },
+    { title: "Lab Komputer", image: "/fasilitas/sekolah/labkom.jpeg", jumlah: 2 },
+    { title: "Ruang Gym", image: "/fasilitas/sekolah/rapat.jpg", jumlah: 1 },
+    { title: "Ruang Konsultansi", image: "/fasilitas/sekolah/konsultansi.jpg", jumlah: 1 },
+    { title: "Ruang Kelas", image: "/fasilitas/sekolah/kelas.jpg", jumlah: 4 },
   ];
 
   return (
     <section className="min-h-screen bg-[#ffffff] p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <h1 className="text-[#005bd3] text-5xl font-bold mb-12 text-center">
+        <h1 className="text-[#005bd3] text-4xl font-bold mb-10 text-left">
           Fasilitas Sekolah
         </h1>
 
         {/* Facilities Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {facilities.map((facility, index) => (
-            <div key={index} className="relative group cursor-pointer">
-              <div className="relative overflow-hidden rounded-2xl aspect-[4/3]">
+            <div
+              key={index}
+              className="relative group cursor-pointer overflow-hidden rounded-2xl"
+            >
+              {/* Image Container with Border Animation */}
+              <div className="relative rounded-2xl overflow-hidden transition-all duration-500 border-4 border-transparent group-hover:border-white group-hover:scale-105">
                 <img
                   src={facility.image || "/placeholder.svg"}
                   alt={facility.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500"
                 />
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black bg-opacity-20 rounded-2xl" />
-                {/* Title Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-white text-xl font-semibold drop-shadow-lg">
-                    {facility.title}
-                  </h3>
-                </div>
+              </div>
+
+              {/* Text Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-center transition-all duration-500 group-hover:translate-y-[-15px]">
+                <h3 className="text-white text-xl font-semibold drop-shadow-lg">
+                  {facility.title}
+                </h3>
+                <p className="text-white text-lg opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  Jumlah: {facility.jumlah}
+                </p>
               </div>
             </div>
           ))}
@@ -156,3 +164,4 @@ function SchoolFacilities() {
     </section>
   );
 }
+
