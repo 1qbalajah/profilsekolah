@@ -89,43 +89,49 @@ export default function SchoolProfile() {
       <div
         className="relative h-[60vh] bg-cover bg-center bg-no-repeat flex items-end"
         style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/fasilitas/sekolah/gedungsekolah.png')`,
+          backgroundImage: `url('/fasilitas/sekolah/gedungsekolah.png')`,
         }}
       >
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 mb-8">
-          <h1 className="text-white md:text-6xl text-4xl font-bold tracking-wide">
-            PROFIL SEKOLAH
+        <div className="container mx-auto px-6">
+          <h1 className="text-white md:text-6xl text-4xl font-bold tracking-wide mb-12">
+            Profil Sekolah
           </h1>
         </div>
       </div>
 
       {/* About Section */}
       <div className="bg-white py-16">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+        <div className="container mx-auto px-6">
           <h2 className="text-[#005bd3] text-2xl md:text-3xl font-semibold mb-8">
             Sekilas Tentang SMK TI Bazma
           </h2>
           <div className="space-y-6 text-[#000000] leading-relaxed">
             <p className="text-base md:text-lg">
-              SMK TI BAZMA adalah sekolah unggulan berasrama gratis untuk
-              anak-anak tidak mampu. Pembangunan dan operasional didanai dari
-              wakaf dan dana sosial kemanusiaan masyarakat.
+              SMK TI BAZMA Islamic Boarding School adalah sekolah menengah
+              kejuruan berasrama yang menghadirkan pendidikan teknologi
+              informasi terpadu dengan pembinaan karakter Islami. Diperuntukkan
+              bagi anak-anak dhuafa dari seluruh Indonesia, sekolah ini berdiri
+              melalui dukungan wakaf dan dana sosial kemanusiaan yang dikelola
+              Yayasan BAZMA.
             </p>
             <p className="text-base md:text-lg">
-              Pendidikan berlangsung 4 tahun dengan jurusan SIJA (Sistem
-              Informatika, Jaringan & Aplikasi) dan kurikulum berbasis asrama,
-              menyiapkan siswa berkompeten dan siap industri.
+              Pendidikan ditempuh selama 4 tahun dengan jurusan SIJA (Sistem
+              Informatika, Jaringan & Aplikasi), diperkaya kurikulum berbasis
+              praktik nyata dan pembinaan karakter. Tahun terakhir diisi dengan
+              magang eksklusif di perusahaan mitra, termasuk anak perusahaan
+              Pertamina, sehingga siswa tidak hanya belajar di kelas, tetapi
+              juga merasakan langsung dinamika industri teknologi.
             </p>
           </div>
         </div>
       </div>
 
       {/* Vision Section */}
-      <section className="bg-white py-12">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="bg-[#132b6d] text-white p-8 rounded-lg mb-8">
-            <h2 className="text-2xl font-bold mb-4">VISI</h2>
-            <p className="text-lg leading-relaxed">
+      <section className="bg-white py-5">
+        <div className="container mx-auto px-6">
+          <div className="bg-[#132b6d] text-white p-8 rounded-xl overflow-hidden mb-8">
+            <h2 className="text-2xl font-bold mb-4 px-5">VISI</h2>
+            <p className="text-lg leading-relaxed px-5">
               Menjadi lembaga pendidikan kejuruan terdepan yang menghasilkan
               lulusan berkompeten, berkarakter, dan siap menghadapi tantangan
               global.
@@ -135,22 +141,23 @@ export default function SchoolProfile() {
       </section>
 
       {/* Mission Section */}
-      <section className="bg-white py-12">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-20">
-          <h2 className="text-2xl font-bold mb-6" style={{ color: "#132b6d" }}>
+      <section className="bg-white mb-16">
+        <div className="container mx-auto px-12">
+          <h2
+            className="text-2xl font-bold mb-6 px-5"
+            style={{ color: "#132b6d" }}
+          >
             MISI
           </h2>
-          <div className="space-y-4">
-            <p className="text-gray-700 py-4 border-b-2 border-gray-300">
-              Menyelenggarakan pendidikan kejuruan berkualitas sesuai standar
-              nasional
+          <div className="space-y-4 px-5">
+            <p className="text-black py-4 border-b-1 border-black font-medium">
+              Menyelenggarakan Sekolah Menengah Kejuruan (SMK) yang berkualitas.
             </p>
-            <p className="text-gray-700 py-4 border-b-2 border-gray-300">
-              Mengembangkan kurikulum relevan dengan kebutuhan industri
+            <p className="text-black py-4 border-b-1 border-black font-medium">
+              Melahirkan lulusan yang berkarakter unggul siap kerja.
             </p>
-            <p className="text-gray-700 py-4 border-b-2 border-gray-300">
-              Membentuk karakter siswa berakhlak mulia dan memiliki jiwa
-              entrepreneur
+            <p className="text-black py-4 border-b-1 border-black font-medium">
+              Mewujudkan generasi SDM yang berdaya saing global.
             </p>
           </div>
         </div>
@@ -158,8 +165,9 @@ export default function SchoolProfile() {
 
       {/* Core Values */}
       <section className="bg-[#f2f7ff] py-16">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20">
+        <div className="container mx-auto px-12">
           <div className="grid grid-cols-4 gap-8 items-center">
+            {/* Kiri */}
             <div className="flex flex-col items-center lg:items-start justify-center col-span-1">
               <h1 className="text-[#132b6d] text-4xl font-bold text-center lg:text-left mb-[120px]">
                 Core Value
@@ -174,22 +182,42 @@ export default function SchoolProfile() {
               </div>
             </div>
 
+            {/* Kanan */}
             <div className="flex col-span-3 justify-end gap-4 flex-wrap">
               {coreValues.map((value, index) => {
                 const color = colors[index % colors.length];
                 return (
                   <div
                     key={index}
-                    className={`group relative flex-shrink-0 ${color.base} rounded-3xl overflow-hidden shadow-lg cursor-pointer transition-all duration-700 ease-in-out w-20 hover:w-80 h-[420px]`}
+                    className={`group relative flex-shrink-0 ${color.base} rounded-3xl overflow-hidden shadow-lg cursor-pointer transition-all duration-700 ease-in-out w-32 hover:w-96 h-[500px]`}
                   >
+                    {/* Gambar */}
                     <img
                       src={value.image}
                       alt={value.title}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
+
+                    {/* Gradient */}
                     <div
                       className={`absolute inset-0 bg-gradient-to-t ${color.gradient} to-transparent opacity-100 transition-opacity duration-700 ease-in-out`}
                     />
+
+                    {/* === TEKS VERTIKAL SEBELUM HOVER (POSISI BAWAH) === */}
+                    <div className="absolute inset-0 flex justify-center items-end mb-6">
+                      <span
+                        className="
+                    text-white text-3xl font-extrabold
+                    transition-opacity duration-700
+                    group-hover:opacity-0
+                    [writing-mode:vertical-lr] rotate-180  /* teks dari bawah ke atas */
+                  "
+                      >
+                        {value.title}
+                      </span>
+                    </div>
+
+                    {/* Teks Hover */}
                     <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out">
                       <h2 className="text-white text-xl font-bold mb-2">
                         {value.title}
@@ -207,25 +235,33 @@ export default function SchoolProfile() {
       </section>
 
       {/* Kilas Balik */}
-      <div className="bg-[#fffdfd] flex justify-center items-start w-screen">
-        <div className="bg-[#fffdfd] w-full max-w-[1728px] h-[600px] relative">
-          <div className="absolute w-[514px] h-[221px] top-[143px] left-[167px]">
-            <h2 className="font-semibold text-[#132b6d] text-[32px]">
-              Kilas Balik SMK TI BAZMA
-            </h2>
-            <p className="font-medium text-black text-lg mt-4">
-              SMK TI BAZMA merupakan sekolah unggulan berasrama yang bebas biaya
-              dan diperuntukan untuk anak-anak tidak mampu.
-            </p>
-          </div>
-          <div className="absolute w-[560px] h-[310px] top-[120px] left-[800px] rounded-[20px] overflow-hidden shadow-lg">
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/tM8rFu3mwCY"
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            ></iframe>
+      <div className="bg-[#fffdfd] w-full flex justify-center items-center py-20">
+        <div className="container mx-auto px-12">
+          {/* Grid 2 kolom agar kiri & kanan sejajar */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Kolom Kiri: Teks */}
+            <div>
+              <h2 className="font-semibold text-[#132b6d] text-[32px]">
+                Kilas Balik SMK TI BAZMA
+              </h2>
+              <p className="font-medium text-black text-lg mt-4 leading-relaxed text-justify">
+                Sekolah Menengah Kejuruan Teknologi Informasi Bazma (SMK TI
+                BAZMA) merupakan sekolah unggulan berasrama yang bebas biaya dan
+                diperuntukan untuk anak-anak tidak mampu.
+              </p>
+            </div>
+
+            {/* Kolom Kanan: Video */}
+            <div className="w-full max-w-[560px] ml-auto mr-0 rounded-[20px] overflow-hidden shadow-lg">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/tM8rFu3mwCY"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                className="w-full h-[315px]"
+              ></iframe>
+            </div>
           </div>
         </div>
       </div>
