@@ -2,24 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @layer base {
-  :root {
-    --radius: 0.5rem
+  body {
+    @apply bg-gray-100 text-gray-900;
   }
-}
-@keyframes scroll-horizontal {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-scroll-horizontal {
-  animation: scroll-horizontal 10s linear infinite;
-}
-
-
-.bg-blue {
-  background-color: #005BD3;
 }
