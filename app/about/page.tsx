@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
-import { Card, CardContent } from "../../components/ui/card";
+import React, { useState } from "react";
 import TimelineCarousel from "./components/TimelineCarousel";
+import { komisaris, direktur, tendik } from "./components/datatendik";
 
-// Data timeline
+/* ===================== DATA TIMELINE ===================== */
 const timelineItems = [
   {
     year: "2014",
@@ -23,7 +23,7 @@ const timelineItems = [
     year: "2022",
     title: "Penerimaan Siswa Pertama",
     description:
-      "SMK TI BAZMA menerima siswa pertama dari seluruh Indonesia dengan program SIJA (Sistem Informatika, Jaringan & Aplikasi).",
+      "SMK TI BAZMA menerima siswa pertama dari seluruh Indonesia dengan program SIJA.",
     image: "/carousel/gambar3.png",
   },
   {
@@ -43,34 +43,31 @@ const timelineItems = [
   {
     year: "2025",
     title: "Visi Masa Depan",
-    description:
-      "Menjadi sekolah unggulan kejuruan terdepan di Asia Tenggara, menghasilkan lulusan siap kerja, inovatif, dan berjiwa entrepreneur.",
+    description: "Menjadi sekolah unggulan kejuruan terdepan di Asia Tenggara.",
     image: "/carousel/gambar6.png",
   },
 ];
 
-// Data core values
+/* ===================== DATA CORE VALUE ===================== */
 const coreValues = [
   {
     title: "Mudah Bergaul",
-    description:
-      "Membangun hubungan yang hangat dan saling menghargai, sehingga mudah berkolaborasi dengan siapa pun.",
+    description: "Membangun hubungan yang hangat dan saling menghargai.",
     image: "/mandiri.jpg",
   },
   {
     title: "Mandiri",
-    description:
-      "Mampu mengembangkan diri dan bertanggung jawab secara mandiri.",
+    description: "Mampu mengembangkan diri dan bertanggung jawab.",
     image: "/ustadzah.JPG",
   },
   {
     title: "Profesional",
-    description: "Bekerja secara profesional sesuai kompetensi dan etika.",
+    description: "Bekerja sesuai kompetensi dan etika.",
     image: "/best.png",
   },
   {
     title: "Gigih",
-    description: "Memiliki semangat pantang menyerah dalam mencapai tujuan.",
+    description: "Semangat pantang menyerah.",
     image: "/server.png",
   },
 ];
@@ -82,10 +79,73 @@ const colors = [
   { base: "bg-green-600", gradient: "from-green-600/80" },
 ];
 
+/* ===================== DATA FASILITAS ===================== */
+const sekolahFacilities = [
+  { title: "Lab Komputer", image: "/fasilitas/sekolah/labkom.jpeg" },
+  { title: "Ruang Rapat", image: "/fasilitas/sekolah/rapat.jpg" },
+  { title: "Ruang Konsultansi", image: "/fasilitas/sekolah/konsultansi.jpg" },
+  { title: "Ruang Kelas", image: "/fasilitas/sekolah/kelas.jpg" },
+];
+
+const asramaFacilities = [
+  { title: "Barbershop", image: "/fasilitas/asrama/barbershop.avif" },
+  { title: "Kamar Tidur", image: "/fasilitas/asrama/kamarsiswa.jpeg" },
+  { title: "Ruang Gym", image: "/fasilitas/asrama/gym.jpeg" },
+  { title: "Kamar Sehat", image: "/fasilitas/asrama/kamarsehat.jpeg" },
+];
+
+/* ===================== CARD GRID ===================== */
+const CardGrid = ({ data }: { data: any[] }) => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {data.map((item, index) => (
+      <div
+        key={index}
+        className="
+          rounded-xl 
+          overflow-hidden 
+          shadow-lg 
+          hover:shadow-2xl 
+          transition-all duration-500 
+          relative
+          hover:-translate-y-1    /* geser naik sedikit saat hover */
+        "
+      >
+        {/* Foto */}
+        <div className="w-full h-100 relative overflow-hidden">
+          <img
+            src={item.foto}
+            alt={item.name}
+            className="
+              w-full h-full object-cover 
+              transform transition-transform duration-500 
+              group-hover:scale-110 hover:scale-110 /* zoom saat hover */
+            "
+          />
+          {/* Gradient overlay → putih atas, hitam bawah */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-white/10"></div>
+        </div>
+
+        {/* Teks di bawah */}
+        <div className="p-4 absolute bottom-0 left-0 right-0 z-10">
+          <h3 className="text-lg font-bold text-white">{item.name}</h3>
+          <p className="text-sm text-gray-200">{item.jabatan}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+/* ===================== MAIN COMPONENT ===================== */
 export default function SchoolProfile() {
+  const [selectedTab, setSelectedTab] = useState<"sekolah" | "asrama">(
+    "sekolah"
+  );
+  const facilities =
+    selectedTab === "sekolah" ? sekolahFacilities : asramaFacilities;
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* HERO */}
       <div
         className="relative h-[60vh] bg-cover bg-center bg-no-repeat flex items-end"
         style={{
@@ -99,75 +159,58 @@ export default function SchoolProfile() {
         </div>
       </div>
 
-      {/* About Section */}
+      {/* ABOUT */}
       <div className="bg-white py-16">
         <div className="container mx-auto px-6">
           <h2 className="text-[#005bd3] text-2xl md:text-3xl font-semibold mb-8">
             Sekilas Tentang SMK TI Bazma
           </h2>
-          <div className="space-y-6 text-[#000000] leading-relaxed">
-            <p className="text-base md:text-lg">
-              SMK TI BAZMA Islamic Boarding School adalah sekolah menengah
-              kejuruan berasrama yang menghadirkan pendidikan teknologi
-              informasi terpadu dengan pembinaan karakter Islami. Diperuntukkan
-              bagi anak-anak dhuafa dari seluruh Indonesia, sekolah ini berdiri
-              melalui dukungan wakaf dan dana sosial kemanusiaan yang dikelola
-              Yayasan BAZMA.
-            </p>
-            <p className="text-base md:text-lg">
-              Pendidikan ditempuh selama 4 tahun dengan jurusan SIJA (Sistem
-              Informatika, Jaringan & Aplikasi), diperkaya kurikulum berbasis
-              praktik nyata dan pembinaan karakter. Tahun terakhir diisi dengan
-              magang eksklusif di perusahaan mitra, termasuk anak perusahaan
-              Pertamina, sehingga siswa tidak hanya belajar di kelas, tetapi
-              juga merasakan langsung dinamika industri teknologi.
-            </p>
-          </div>
+          <p className="text-base md:text-lg text-[#000000] leading-relaxed mb-4">
+            SMK TI BAZMA Islamic Boarding School adalah sekolah menengah
+            kejuruan berasrama yang menghadirkan pendidikan teknologi informasi
+            terpadu dengan pembinaan karakter Islami.
+          </p>
+          <p className="text-base md:text-lg text-[#000000] leading-relaxed">
+            Pendidikan ditempuh selama 4 tahun dengan jurusan SIJA, diperkaya
+            kurikulum berbasis praktik nyata dan pembinaan karakter.
+          </p>
         </div>
       </div>
 
-      {/* Vision Section */}
+      {/* VISI */}
       <section className="bg-white py-5">
         <div className="container mx-auto px-6">
           <div className="bg-[#132b6d] text-white p-8 rounded-xl overflow-hidden mb-8">
             <h2 className="text-2xl font-bold mb-4 px-5">VISI</h2>
             <p className="text-lg leading-relaxed px-5">
-              Menjadi lembaga pendidikan kejuruan terdepan yang menghasilkan
-              lulusan berkompeten, berkarakter, dan siap menghadapi tantangan
-              global.
+              Menjadi lembaga pendidikan kejuruan terdepan.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Mission Section */}
+      {/* MISI */}
       <section className="bg-white mb-16">
         <div className="container mx-auto px-12">
-          <h2
-            className="text-2xl font-bold mb-6 px-5"
-            style={{ color: "#132b6d" }}
-          >
-            MISI
-          </h2>
+          <h2 className="text-2xl font-bold mb-6 px-5 text-[#132b6d]">MISI</h2>
           <div className="space-y-4 px-5">
-            <p className="text-black py-4 border-b-1 border-black font-medium">
+            <p className="text-black py-4 font-medium">
               Menyelenggarakan Sekolah Menengah Kejuruan (SMK) yang berkualitas.
             </p>
-            <p className="text-black py-4 border-b-1 border-black font-medium">
+            <p className="text-black py-4 font-medium">
               Melahirkan lulusan yang berkarakter unggul siap kerja.
             </p>
-            <p className="text-black py-4 border-b-1 border-black font-medium">
+            <p className="text-black py-4 font-medium">
               Mewujudkan generasi SDM yang berdaya saing global.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Core Values */}
+      {/* CORE VALUE */}
       <section className="bg-[#f2f7ff] py-16">
-        <div className="container mx-auto px-12">
+        <div className="container mx-auto px-6">
           <div className="grid grid-cols-4 gap-8 items-center">
-            {/* Kiri */}
             <div className="flex flex-col items-center lg:items-start justify-center col-span-1">
               <h1 className="text-[#132b6d] text-4xl font-bold text-center lg:text-left mb-[120px]">
                 Core Value
@@ -181,8 +224,6 @@ export default function SchoolProfile() {
                 />
               </div>
             </div>
-
-            {/* Kanan */}
             <div className="flex col-span-3 justify-end gap-4 flex-wrap">
               {coreValues.map((value, index) => {
                 const color = colors[index % colors.length];
@@ -191,33 +232,19 @@ export default function SchoolProfile() {
                     key={index}
                     className={`group relative flex-shrink-0 ${color.base} rounded-3xl overflow-hidden shadow-lg cursor-pointer transition-all duration-700 ease-in-out w-32 hover:w-96 h-[500px]`}
                   >
-                    {/* Gambar */}
                     <img
                       src={value.image}
                       alt={value.title}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-
-                    {/* Gradient */}
                     <div
                       className={`absolute inset-0 bg-gradient-to-t ${color.gradient} to-transparent opacity-100 transition-opacity duration-700 ease-in-out`}
                     />
-
-                    {/* === TEKS VERTIKAL SEBELUM HOVER (POSISI BAWAH) === */}
                     <div className="absolute inset-0 flex justify-center items-end mb-6">
-                      <span
-                        className="
-                    text-white text-3xl font-extrabold
-                    transition-opacity duration-700
-                    group-hover:opacity-0
-                    [writing-mode:vertical-lr] rotate-180  /* teks dari bawah ke atas */
-                  "
-                      >
+                      <span className="text-white text-3xl font-extrabold transition-opacity duration-700 group-hover:opacity-0 [writing-mode:vertical-lr] rotate-180">
                         {value.title}
                       </span>
                     </div>
-
-                    {/* Teks Hover */}
                     <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out">
                       <h2 className="text-white text-xl font-bold mb-2">
                         {value.title}
@@ -234,24 +261,19 @@ export default function SchoolProfile() {
         </div>
       </section>
 
-      {/* Kilas Balik */}
+      {/* KILAS BALIK */}
       <div className="bg-[#fffdfd] w-full flex justify-center items-center py-20">
-        <div className="container mx-auto px-12">
-          {/* Grid 2 kolom agar kiri & kanan sejajar */}
+        <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Kolom Kiri: Teks */}
             <div>
               <h2 className="font-semibold text-[#132b6d] text-[32px]">
                 Kilas Balik SMK TI BAZMA
               </h2>
               <p className="font-medium text-black text-lg mt-4 leading-relaxed text-justify">
-                Sekolah Menengah Kejuruan Teknologi Informasi Bazma (SMK TI
-                BAZMA) merupakan sekolah unggulan berasrama yang bebas biaya dan
-                diperuntukan untuk anak-anak tidak mampu.
+                SMK TI BAZMA merupakan sekolah unggulan berasrama yang bebas
+                biaya.
               </p>
             </div>
-
-            {/* Kolom Kanan: Video */}
             <div className="w-full max-w-[560px] ml-auto mr-0 rounded-[20px] overflow-hidden shadow-lg">
               <iframe
                 width="560"
@@ -266,8 +288,84 @@ export default function SchoolProfile() {
         </div>
       </div>
 
-      {/* Timeline Carousel */}
+      {/* TIMELINE */}
       <TimelineCarousel items={timelineItems} />
+
+      {/* FASILITAS */}
+      <section className="bg-white py-16 w-full">
+        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-5 text-left">
+          Fasilitas
+        </h2>
+        <div className="container mx-auto px-6 mb-8">
+          <div className="relative w-[300px] mx-0 rounded-full border-2 border-[#132b6d] p-1 flex">
+            <div
+              className="absolute top-1 h-[calc(100%-0.5rem)] w-[calc(50%-0.5rem)] bg-[#132b6d] rounded-full transition-all duration-500 ease-in-out"
+              style={{
+                left:
+                  selectedTab === "sekolah" ? "0.25rem" : "calc(50% + 0.25rem)",
+              }}
+            />
+            <button
+              onClick={() => setSelectedTab("sekolah")}
+              className={`relative z-10 flex-1 py-2 text-lg font-medium rounded-full transition-colors duration-500 ${
+                selectedTab === "sekolah" ? "text-white" : "text-[#132b6d]"
+              }`}
+            >
+              Sekolah
+            </button>
+            <button
+              onClick={() => setSelectedTab("asrama")}
+              className={`relative z-10 flex-1 py-2 text-lg font-medium rounded-full transition-colors duration-500 ${
+                selectedTab === "asrama" ? "text-white" : "text-[#132b6d]"
+              }`}
+            >
+              Asrama
+            </button>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-0">
+          {facilities.map((facility, index) => (
+            <div
+              key={index}
+              className="relative overflow-hidden shadow-lg group w-full h-[500px]"
+            >
+              <img
+                src={facility.image}
+                alt={facility.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-black/40 text-white px-4 py-2">
+                <p className="font-medium">{facility.title}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* STRUKTUR ORGANISASI */}
+      <section className="bg-[#ffffff] py-16">
+        {/* Komisaris */}
+        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
+          Jajaran Komisaris
+        </h2>
+        <div className="container mx-auto px-6 mb-16">
+          <CardGrid data={komisaris} />
+        </div>
+        {/* Direktur */}
+        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
+          Jajaran Direktur
+        </h2>
+        <div className="container mx-auto px-6 mb-16">
+          <CardGrid data={direktur} />
+        </div>
+        {/* Tendik */}
+        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
+          Tendik
+        </h2>
+        <div className="container mx-auto px-6">
+          <CardGrid data={tendik} />
+        </div>
+      </section>
     </div>
   );
 }
