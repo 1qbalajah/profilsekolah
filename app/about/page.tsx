@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import TimelineCarousel from "./components/TimelineCarousel";
-import { komisaris, direktur, tendik } from "./components/datatendik";
+import { kepemimpinan, KA, TU, asrama, tendik } from "./components/datatendik";
 
 /* ===================== DATA TIMELINE ===================== */
 const timelineItems = [
@@ -81,53 +81,43 @@ const colors = [
 
 /* ===================== DATA FASILITAS ===================== */
 const sekolahFacilities = [
-  { title: "Lab Komputer", image: "/fasilitas/sekolah/labkom.jpeg" },
-  { title: "Ruang Rapat", image: "/fasilitas/sekolah/rapat.jpg" },
-  { title: "Ruang Konsultansi", image: "/fasilitas/sekolah/konsultansi.jpg" },
-  { title: "Ruang Kelas", image: "/fasilitas/sekolah/kelas.jpg" },
+  { title: "Lab Komputer", keterangan: "Sekolah", image: "/fasilitas/sekolah/labkom.jpeg" }, 
+  { title: "Ruang Rapat", keterangan: "Sekolah", image: "/fasilitas/sekolah/rapat.jpg" },
+  { title: "Ruang Konsultansi", keterangan: "Sekolah", image: "/fasilitas/sekolah/konsultansi.jpg" },
+  { title: "Ruang Kelas", keterangan: "Sekolah", image: "/fasilitas/sekolah/kelas.jpg" },
 ];
 
 const asramaFacilities = [
-  { title: "Barbershop", image: "/fasilitas/asrama/barbershop.avif" },
-  { title: "Kamar Tidur", image: "/fasilitas/asrama/kamarsiswa.jpeg" },
-  { title: "Ruang Gym", image: "/fasilitas/asrama/gym.jpeg" },
-  { title: "Kamar Sehat", image: "/fasilitas/asrama/kamarsehat.jpeg" },
+  { title: "Barbershop", keterangan: "Asrama", image: "/fasilitas/asrama/barbershop.avif" },
+  { title: "Kamar Tidur", keterangan: "Asrama", image: "/fasilitas/asrama/kamarsiswa.jpeg" },
+  { title: "Ruang Gym", keterangan: "Asrama", image: "/fasilitas/asrama/gym.jpeg" },
+  { title: "Kamar Sehat", keterangan: "Asrama", image: "/fasilitas/asrama/kamarsehat.jpeg" },
 ];
 
-/* ===================== CARD GRID ===================== */
+/* ===================== CARD GRID untuk fasilitas ===================== */
 const CardGrid = ({ data }: { data: any[] }) => (
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     {data.map((item, index) => (
       <div
         key={index}
-        className="
-          rounded-xl 
-          overflow-hidden 
-          shadow-lg 
-          hover:shadow-2xl 
-          transition-all duration-500 
-          relative
-          hover:-translate-y-1    /* geser naik sedikit saat hover */
-        "
+        className="relative rounded-xl overflow-hidden group cursor-pointer"
       >
-        {/* Foto */}
-        <div className="w-full h-100 relative overflow-hidden">
+        {/* Gambar */}
+        <div className="relative w-full overflow-hidden">
           <img
             src={item.foto}
             alt={item.name}
-            className="
-              w-full h-full object-cover 
-              transform transition-transform duration-500 
-              group-hover:scale-110 hover:scale-110 /* zoom saat hover */
-            "
+            className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
           />
-          {/* Gradient overlay → putih atas, hitam bawah */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-white/10"></div>
+          {/* Overlay gradient → muncul saat hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
         </div>
 
-        {/* Teks di bawah */}
-        <div className="p-4 absolute bottom-0 left-0 right-0 z-10">
-          <h3 className="text-lg font-bold text-white">{item.name}</h3>
+        {/* Teks */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 z-10 transition-all duration-500">
+          <h3 className="text-xl font-bold text-white drop-shadow-md">
+            {item.name}
+          </h3>
           <p className="text-sm text-gray-200">{item.jabatan}</p>
         </div>
       </div>
@@ -327,15 +317,37 @@ export default function SchoolProfile() {
           {facilities.map((facility, index) => (
             <div
               key={index}
-              className="relative overflow-hidden shadow-lg group w-full h-[500px]"
+              className="relative overflow-hidden group w-full h-100" // ✅ Tinggikan card
             >
+              {/* Gambar */}
               <img
                 src={facility.image}
                 alt={facility.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-black/40 text-white px-4 py-2">
-                <p className="font-medium">{facility.title}</p>
+
+              {/* Overlay Gradient */}
+              <div
+                className="
+          absolute inset-0 
+          bg-gradient-to-t from-black via-black/40 to-white/10 
+          opacity-70 group-hover:opacity-90 
+          transition-opacity duration-700
+        "
+              ></div>
+
+              {/* Teks di dalam gambar */}
+              <div className="absolute bottom-3 left-0 right-0 p-6 z-10">
+                {/* ✅ Tambahkan keterangan kecil di atas title */}
+                {facility.keterangan && (
+                  <span className="text-xs text-gray-200 opacity-70 tracking-wide uppercase block mb-1">
+                    {facility.keterangan}
+                  </span>
+                )}
+
+                <p className="text-2xl font-bold text-white drop-shadow-md">
+                  {facility.title}
+                </p>
               </div>
             </div>
           ))}
@@ -344,26 +356,183 @@ export default function SchoolProfile() {
 
       {/* STRUKTUR ORGANISASI */}
       <section className="bg-[#ffffff] py-16">
-        {/* Komisaris */}
+        {/* Kepemimpinan */}
         <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
-          Jajaran Komisaris
+          Kepemimpinan
         </h2>
-        <div className="container mx-auto px-6 mb-16">
-          <CardGrid data={komisaris} />
+        <div className="container mx-auto px-6 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {kepemimpinan.map((item, index) => (
+            <div
+              key={index}
+              className="
+          rounded-xl 
+          overflow-hidden 
+          shadow-lg 
+          hover:shadow-2xl 
+          transition-all duration-500 
+          relative
+          hover:-translate-y-1
+          h-[500px]  /* ✅ Tinggi card dinaikkan */
+        "
+            >
+              {/* Foto */}
+              <div className="w-full h-full relative overflow-hidden">
+                <img
+                  src={item.foto}
+                  alt={item.name}
+                  className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-110"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-white/10"></div>
+              </div>
+
+              {/* Teks di dalam gambar */}
+              <div className="p-4 absolute bottom-0 left-0 right-0 z-10">
+                <h3 className="text-lg font-bold text-white">{item.name}</h3>
+                <p className="text-sm text-gray-200">{item.jabatan}</p>
+              </div>
+            </div>
+          ))}
         </div>
-        {/* Direktur */}
+
+        {/* KA */}
         <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
-          Jajaran Direktur
+          Kepala A
         </h2>
-        <div className="container mx-auto px-6 mb-16">
-          <CardGrid data={direktur} />
+        <div className="container mx-auto px-6 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {KA.map((item, index) => (
+            <div
+              key={index}
+              className="
+          rounded-xl 
+          overflow-hidden 
+          shadow-lg 
+          hover:shadow-2xl 
+          transition-all duration-500 
+          relative
+          hover:-translate-y-1
+          h-100
+        "
+            >
+              <div className="w-full h-full relative overflow-hidden">
+                <img
+                  src={item.foto}
+                  alt={item.name}
+                  className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-white/10"></div>
+              </div>
+              <div className="p-4 absolute bottom-0 left-0 right-0 z-10">
+                <h3 className="text-lg font-bold text-white">{item.name}</h3>
+                <p className="text-sm text-gray-200">{item.jabatan}</p>
+              </div>
+            </div>
+          ))}
         </div>
+
+        {/* TU */}
+        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
+          Tata Usaha
+        </h2>
+        <div className="container mx-auto px-6 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {TU.map((item, index) => (
+            <div
+              key={index}
+              className="
+          rounded-xl 
+          overflow-hidden 
+          shadow-lg 
+          hover:shadow-2xl 
+          transition-all duration-500 
+          relative
+          hover:-translate-y-1
+          h-100
+        "
+            >
+              <div className="w-full h-full relative overflow-hidden">
+                <img
+                  src={item.foto}
+                  alt={item.name}
+                  className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-white/10"></div>
+              </div>
+              <div className="p-4 absolute bottom-0 left-0 right-0 z-10">
+                <h3 className="text-lg font-bold text-white">{item.name}</h3>
+                <p className="text-sm text-gray-200">{item.jabatan}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Asrama */}
+        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
+          Asrama
+        </h2>
+        <div className="container mx-auto px-6 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {asrama.map((item, index) => (
+            <div
+              key={index}
+              className="
+          rounded-xl 
+          overflow-hidden 
+          shadow-lg 
+          hover:shadow-2xl 
+          transition-all duration-500 
+          relative
+          hover:-translate-y-1
+          h-100
+        "
+            >
+              <div className="w-full h-full relative overflow-hidden">
+                <img
+                  src={item.foto}
+                  alt={item.name}
+                  className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-white/10"></div>
+              </div>
+              <div className="p-4 absolute bottom-0 left-0 right-0 z-10">
+                <h3 className="text-lg font-bold text-white">{item.name}</h3>
+                <p className="text-sm text-gray-200">{item.jabatan}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Tendik */}
         <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
-          Tendik
+          Tenaga Pendidikan
         </h2>
-        <div className="container mx-auto px-6">
-          <CardGrid data={tendik} />
+        <div className="container mx-auto px-6 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {tendik.map((item, index) => (
+            <div
+              key={index}
+              className="
+          rounded-xl 
+          overflow-hidden 
+          shadow-lg 
+          hover:shadow-2xl 
+          transition-all duration-500 
+          relative
+          hover:-translate-y-1
+          h-100
+        "
+            >
+              <div className="w-full h-full relative overflow-hidden">
+                <img
+                  src={item.foto}
+                  alt={item.name}
+                  className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-white/10"></div>
+              </div>
+              <div className="p-4 absolute bottom-0 left-0 right-0 z-10">
+                <h3 className="text-lg font-bold text-white">{item.name}</h3>
+                <p className="text-sm text-gray-200">{item.jabatan}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </div>

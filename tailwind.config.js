@@ -11,7 +11,7 @@ module.exports = {
     extend: {
       // ===== Tambahan tinggi custom =====
       height: {
-        100: '500px', // sekarang bisa pakai h-100 (400px)
+        100: '600px', // sekarang bisa pakai h-100 (400px)
       },
 
       // ===== Font Custom =====
