@@ -19,9 +19,7 @@ export const kepemimpinan = [
     jabatan: "Waka. Kesiswaan",
     foto: "/tendik/pak indra.png",
   },
-];
 
-export const KA = [
   {
     name: "M. Dzikri Fauzan, S.Kom",
     jabatan: "Ka. SIJA",

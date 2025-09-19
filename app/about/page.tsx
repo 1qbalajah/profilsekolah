@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import TimelineCarousel from "./components/TimelineCarousel";
-import { kepemimpinan, KA, TU, asrama, tendik } from "./components/datatendik";
+import { kepemimpinan, TU, asrama, tendik } from "./components/datatendik";
+import Cta from "@/components/cta";
 
 /* ===================== DATA TIMELINE ===================== */
 const timelineItems = [
@@ -81,17 +82,49 @@ const colors = [
 
 /* ===================== DATA FASILITAS ===================== */
 const sekolahFacilities = [
-  { title: "Lab Komputer", keterangan: "Sekolah", image: "/fasilitas/sekolah/labkom.jpeg" }, 
-  { title: "Ruang Rapat", keterangan: "Sekolah", image: "/fasilitas/sekolah/rapat.jpg" },
-  { title: "Ruang Konsultansi", keterangan: "Sekolah", image: "/fasilitas/sekolah/konsultansi.jpg" },
-  { title: "Ruang Kelas", keterangan: "Sekolah", image: "/fasilitas/sekolah/kelas.jpg" },
+  {
+    title: "Lab Komputer",
+    keterangan: "Sekolah",
+    image: "/fasilitas/sekolah/labkom.jpeg",
+  },
+  {
+    title: "Ruang Rapat",
+    keterangan: "Sekolah",
+    image: "/fasilitas/sekolah/rapat.jpg",
+  },
+  {
+    title: "Ruang Konsultansi",
+    keterangan: "Sekolah",
+    image: "/fasilitas/sekolah/konsultansi.jpg",
+  },
+  {
+    title: "Ruang Kelas",
+    keterangan: "Sekolah",
+    image: "/fasilitas/sekolah/kelas.jpg",
+  },
 ];
 
 const asramaFacilities = [
-  { title: "Barbershop", keterangan: "Asrama", image: "/fasilitas/asrama/barbershop.avif" },
-  { title: "Kamar Tidur", keterangan: "Asrama", image: "/fasilitas/asrama/kamarsiswa.jpeg" },
-  { title: "Ruang Gym", keterangan: "Asrama", image: "/fasilitas/asrama/gym.jpeg" },
-  { title: "Kamar Sehat", keterangan: "Asrama", image: "/fasilitas/asrama/kamarsehat.jpeg" },
+  {
+    title: "Barbershop",
+    keterangan: "Asrama",
+    image: "/fasilitas/asrama/barbershop.avif",
+  },
+  {
+    title: "Kamar Tidur",
+    keterangan: "Asrama",
+    image: "/fasilitas/asrama/kamarsiswa.jpeg",
+  },
+  {
+    title: "Ruang Gym",
+    keterangan: "Asrama",
+    image: "/fasilitas/asrama/gym.jpeg",
+  },
+  {
+    title: "Kamar Sehat",
+    keterangan: "Asrama",
+    image: "/fasilitas/asrama/kamarsehat.jpeg",
+  },
 ];
 
 /* ===================== CARD GRID untuk fasilitas ===================== */
@@ -125,7 +158,11 @@ const CardGrid = ({ data }: { data: any[] }) => (
   </div>
 );
 
-/* ===================== MAIN COMPONENT ===================== */
+const ctaItems = [
+  { href: "/link1", img: "/tendik/bu billa.jpg", title: "Berita" },
+  { href: "/service", img: "/cta/kontak.png", title: "Kontak" },
+];
+
 export default function SchoolProfile() {
   const [selectedTab, setSelectedTab] = useState<"sekolah" | "asrama">(
     "sekolah"
@@ -135,7 +172,7 @@ export default function SchoolProfile() {
 
   return (
     <div className="min-h-screen">
-      {/* HERO */}
+      {/* === HERO === */}
       <div
         className="relative h-[60vh] bg-cover bg-center bg-no-repeat flex items-end"
         style={{
@@ -355,64 +392,16 @@ export default function SchoolProfile() {
       </section>
 
       {/* STRUKTUR ORGANISASI */}
-      <section className="bg-[#ffffff] py-16">
+      <section className="bg-[#ffffff] gap-y-6">
         {/* Kepemimpinan */}
-        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
+        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10">
           Kepemimpinan
         </h2>
         <div className="container mx-auto px-6 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {kepemimpinan.map((item, index) => (
             <div
               key={index}
-              className="
-          rounded-xl 
-          overflow-hidden 
-          shadow-lg 
-          hover:shadow-2xl 
-          transition-all duration-500 
-          relative
-          hover:-translate-y-1
-          h-[500px]  /* ✅ Tinggi card dinaikkan */
-        "
-            >
-              {/* Foto */}
-              <div className="w-full h-full relative overflow-hidden">
-                <img
-                  src={item.foto}
-                  alt={item.name}
-                  className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-110"
-                />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-white/10"></div>
-              </div>
-
-              {/* Teks di dalam gambar */}
-              <div className="p-4 absolute bottom-0 left-0 right-0 z-10">
-                <h3 className="text-lg font-bold text-white">{item.name}</h3>
-                <p className="text-sm text-gray-200">{item.jabatan}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* KA */}
-        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
-          Kepala A
-        </h2>
-        <div className="container mx-auto px-6 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {KA.map((item, index) => (
-            <div
-              key={index}
-              className="
-          rounded-xl 
-          overflow-hidden 
-          shadow-lg 
-          hover:shadow-2xl 
-          transition-all duration-500 
-          relative
-          hover:-translate-y-1
-          h-100
-        "
+              className="rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 relative hover:-translate-y-1 h-[500px]"
             >
               <div className="w-full h-full relative overflow-hidden">
                 <img
@@ -431,23 +420,14 @@ export default function SchoolProfile() {
         </div>
 
         {/* TU */}
-        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
+        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10">
           Tata Usaha
         </h2>
         <div className="container mx-auto px-6 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {TU.map((item, index) => (
             <div
               key={index}
-              className="
-          rounded-xl 
-          overflow-hidden 
-          shadow-lg 
-          hover:shadow-2xl 
-          transition-all duration-500 
-          relative
-          hover:-translate-y-1
-          h-100
-        "
+              className="rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 relative hover:-translate-y-1"
             >
               <div className="w-full h-full relative overflow-hidden">
                 <img
@@ -465,24 +445,16 @@ export default function SchoolProfile() {
           ))}
         </div>
 
+          <section className="bg-[#F2F8FF] py-16 text-white">
         {/* Asrama */}
-        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
+        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10">
           Asrama
         </h2>
         <div className="container mx-auto px-6 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {asrama.map((item, index) => (
             <div
               key={index}
-              className="
-          rounded-xl 
-          overflow-hidden 
-          shadow-lg 
-          hover:shadow-2xl 
-          transition-all duration-500 
-          relative
-          hover:-translate-y-1
-          h-100
-        "
+              className="rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 relative hover:-translate-y-1"
             >
               <div className="w-full h-full relative overflow-hidden">
                 <img
@@ -501,23 +473,14 @@ export default function SchoolProfile() {
         </div>
 
         {/* Tendik */}
-        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10 text-left">
+        <h2 className="container mx-auto px-6 text-3xl font-bold text-[#132b6d] mb-10">
           Tenaga Pendidikan
         </h2>
         <div className="container mx-auto px-6 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {tendik.map((item, index) => (
             <div
               key={index}
-              className="
-          rounded-xl 
-          overflow-hidden 
-          shadow-lg 
-          hover:shadow-2xl 
-          transition-all duration-500 
-          relative
-          hover:-translate-y-1
-          h-100
-        "
+              className="rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 relative hover:-translate-y-1"
             >
               <div className="w-full h-full relative overflow-hidden">
                 <img
@@ -534,6 +497,8 @@ export default function SchoolProfile() {
             </div>
           ))}
         </div>
+        </section>
+        <Cta items={ctaItems} />
       </section>
     </div>
   );
